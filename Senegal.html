@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="images/ecowas.jpg" />
+    <link rel="stylesheet" href="style/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="style/pays.css" type="text/css">
+    <title>Senegal Viz</title>
+    <script type="text/javascript" src="script/d3.js"></script>
+    <script type="text/javascript" src="script/jquery.js"></script>
+</head>
+<body>
+    <div class='container-fluid' id='navig'>
+        <nav class='nav justify-content'>
+            <a class="dropbtn col-md-2" href="index.html">Accueil</a>
+            <div class="dropdown col-md-2">
+                <button class="dropbtn">Visualisation/pays</button>
+                    <div class="dropdown-content">
+                        <a href="Benin.html">Benin</a><a href="Burkina Faso.html">Burkina Faso</a>
+                        <a href="Côte d'Ivoire.html">Côte d'Ivoire</a><a href="Gambia.html">Gambie</a>
+                        <a href="Ghana.html">Ghana</a><a href="Guinea.html">Guinée</a>
+                        <a href="Guinea-Bissau.html">Guinée-Bissau</a><a href="Liberia.html">Liberia</a><a href="Mali.html">Mali</a><a href="Niger.html">Niger</a>
+                        <a href="Nigeria.html">Nigeria</a><a href="Senegal.html">Senegal</a>
+                        <a href="Sierra Leone.html">Sierra Leone</a><a href="Togo.html">Togo</a>
+                    </div>
+            </div>
+            <div class="dropdown col-md-2">
+                <button class="dropbtn">Visualisation/annee</button>
+                    <div class="dropdown-content">
+                        <a href="2017.html">2017</a><a href="2016.html">2016</a>
+                        <a href="2015.html">2015</a><a href="2014.html">2014</a>
+                        <a href="2013.html">2013</a><a href="2012.html">2012</a>
+                        <a href="2011.html">2011</a><a href="2010.html">2010</a>
+                        <a href="2009.html">2009</a><a href="2008.html">2008</a>
+                        <a href="2007.html">2007</a><a href="2006.html">2006</a>
+                        <a href="2005.html">2005</a><a href="2004.html">2004</a>
+                        <a href="2003.html">2003</a><a href="2002.html">2002</a>
+                        <a href="2001.html">2001</a><a href="2000.html">2000</a>
+                    </div>
+            </div>           
+            <a class="dropbtn col-md-2" href="propos.html">A propos</a>
+            <form class="form-inline col-md-34" action="#" class="col-md-1">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Recherche">
+                    <button class="btn btn-success" type="submit">Recherche</button>
+            </form>
+        </nav>
+</div>
+    <div>
+         <h2>Visualisation du paludisme au Sénégal de 2000 à 2017</h2>
+        <svg id="msda" width="1200" height="1000"></svg>
+    </div>
+    <script>
+        const margin = {
+            top: 20,
+            right: 170,
+            bottom: 200,
+            left: 100
+        },
+        width = 1350 - margin.left - margin.right,
+        height = 1000 - margin.top - margin.bottom;
+        const visual = d3.select("#msda")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        d3.csv('data/Sengal.csv', function(error, data) {
+            data.forEach(function(d) {
+                d.Annees = +d.Annees;
+                d["Malades"] = +d["Malades"];
+                d["Deces"] = +d["Deces"];
+            });
+    //Linechart1
+        const x = d3.scale.linear()
+            .range([0, 500])
+            .domain([2000, 2018]);
+
+        const y0 = d3.scale.linear()
+            .range([380, 0])
+            .domain([0, d3.max(data, function(d) {
+                return (d["Malades"]);
+            })]);
+
+        const xAxis = d3.svg.axis().scale(x).orient("bottom");
+        const yAxis = d3.svg.axis().scale(y0).orient("left");
+
+
+        visual.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + 380 + ")")
+            .call(xAxis);
+                
+        visual.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")            
+            .text("Malades");
+
+        const line0 = d3.svg.line()
+            .x(function(d) { return x(d.Annees); })
+            .y(function(d) { return y0(d.Malades); });
+
+        const line1 = d3.svg.line()
+            .x(function(d) { return x(d.Annees); })
+            .y(function(d) { return y1(d.Deces); });
+
+        const path = visual.append('svg:path')
+            .attr("class", "line1")
+            .attr("d", line0(data));
+/*-------------------------------------------*/
+            //Linechart2
+        const z = d3.scale.linear()
+            .range([0, 500])
+            .domain([2000, 2018]);
+
+        const t0 = d3.scale.linear()
+            .range([800, 450])
+            .domain([0, d3.max(data, function(d) {
+                return (d["Deces"]);
+            })]);
+
+        const zAxis = d3.svg.axis().scale(z).orient("bottom");
+        const tAxis = d3.svg.axis().scale(t0).orient("left");
+
+
+        visual.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + 800 + ")")
+            .call(zAxis);
+                
+        visual.append("g")
+            .attr("class", "y axis")
+            .call(tAxis)
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end");
+
+        const line2 = d3.svg.line()
+            .x(function(d) { return z(d.Annees); })
+            .y(function(d) { return t0(d.Deces); });
+
+
+        const path1 = visual.append('svg:path')
+            .attr("class", "line1")
+            .attr("d", line2(data));
+/*-------------------------------------------------------*/
+//Histogramme1
+    const x1 = d3.scale.ordinal()
+    .rangeRoundBands([520,1100],0.50);
+    
+    const y2 = d3.scale.linear()
+    .range([380,0]);
+    
+    const xAxis1 = d3.svg.axis()
+    .scale(x1)
+    .orient("bottom");
+    
+    const yAxis1 = d3.svg.axis()
+    .scale(y2)
+    .orient("left")
+    .ticks(10);
+    
+    data.forEach(function(d){
+        d.Annees = d.Annees;
+        d.Malades = +d.Malades;
+    });
+
+    x1.domain(data.map(function(d){return d.Annees;}));
+    y2.domain([0,d3.max(data, function(d){return d.Malades;})]);
+    
+    visual.append("g")
+    .attr("class","x axis")
+    .attr("transform","translate(0,"+380+")")
+    .call(xAxis1);
+    
+    visual.append("g")
+    .attr("class","y axis")
+    .call(yAxis1);
+    
+    
+    //Representation des données en bande
+    const group = visual.append("g");
+    group.selectAll("bar")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("class","bar")
+    .attr("x",function(d){return x1(d.Annees);})
+    .attr("width",x1.rangeBand())
+    .attr("y",380)
+    .attr("height",0)
+    .attr("fill","white")
+    .transition()
+    .duration(3000)
+    .attr("y",function(d){return y2(d.Malades);})
+    .attr("height",function(d){return 380 - y2(d.Malades);})
+    .style("fill","darkred");
+
+    group.append("text").text("Histogramme de l'évolution nombre de cas infectés").attr("x",700).attr("y",430).style("text-decoration","underline");
+    group.append("text").text("Line chart évolution nombre de cas infectés").attr("x",100).attr("y",430).style("text-decoration","underline")
+/*-------------------------------------------------------*/
+//Histogramme1
+    const t1 = d3.scale.ordinal()
+    .rangeRoundBands([520,1100],0.50);
+    
+    const z2 = d3.scale.linear()
+    .range([800,450]);
+    
+    const tAxis1 = d3.svg.axis()
+    .scale(t1)
+    .orient("bottom");
+    
+    const zAxis1 = d3.svg.axis()
+    .scale(z2)
+    .orient("left")
+    .ticks(10);
+    
+    data.forEach(function(d){
+        d.Annees = d.Annees;
+        d.Malades = +d.Deces;
+    });
+
+    t1.domain(data.map(function(d){return d.Annees;}));
+    z2.domain([0,d3.max(data, function(d){return d.Malades;})]);
+    
+    visual.append("g")
+    .attr("class","x axis")
+    .attr("transform","translate(0,"+800+")")
+    .call(tAxis1);
+    
+    visual.append("g")
+    .attr("class","y axis")
+    .call(zAxis1);
+    
+    
+    //Representation des données en bande
+    const group1 = visual.append("g");
+    group1.selectAll("bar")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("class","bar")
+    .attr("x",function(d){return t1(d.Annees);})
+    .attr("width",t1.rangeBand())
+    .attr("y",800)
+    .attr("height",0)
+    .attr("fill","white")
+    .transition()
+    .duration(3000)
+    .attr("y",function(d){return z2(d.Malades);})
+    .attr("height",function(d){return 800 - z2(d.Malades);})
+    .style("fill","darkred");
+
+    group1.append("text").text("Histogramme de l'évolution nombre de décès").attr("x",700).attr("y",850).style("text-decoration","underline");
+    group1.append("text").text("Line chart évolution nombre de décès").attr("x",100).attr("y",850).style("text-decoration","underline")
+
+});
+    </script>
+
+</body>
+
+</html>

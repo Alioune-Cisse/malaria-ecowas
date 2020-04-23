@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="images/ecowas.jpg" />
+    <link rel="stylesheet" href="style/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="style/pays.css" type="text/css">
+    <title>2009 Viz</title>
+    <script type="text/javascript" src="script/d3.js"></script>
+    <script type="text/javascript" src="script/jquery.js"></script>
+</head>
+<body>
+    <div class='container-fluid' id='navig'>
+        <nav class='nav justify-content'>
+            <a class="dropbtn col-md-2" href="index.html">Accueil</a>
+            <div class="dropdown col-md-2">
+                <button class="dropbtn">Visualisation/pays</button>
+                    <div class="dropdown-content">
+                        <a href="Benin.html">Benin</a><a href="Burkina Faso.html">Burkina Faso</a>
+                        <a href="Côte d'Ivoire.html">Côte d'Ivoire</a><a href="Gambia.html">Gambie</a>
+                        <a href="Ghana.html">Ghana</a><a href="Guinea.html">Guinée</a>
+                        <a href="Guinea-Bissau.html">Guinée-Bissau</a><a href="Liberia.html">Liberia</a><a href="Mali.html">Mali</a><a href="Niger.html">Niger</a>
+                        <a href="Nigeria.html">Nigeria</a><a href="Senegal.html">Senegal</a>
+                        <a href="Sierra Leone.html">Sierra Leone</a><a href="Togo.html">Togo</a>
+                    </div>
+            </div>
+            <div class="dropdown col-md-2">
+                <button class="dropbtn">Visualisation/annee</button>
+                    <div class="dropdown-content">
+                        <a href="2017.html">2017</a><a href="2016.html">2016</a>
+                        <a href="2015.html">2015</a><a href="2014.html">2014</a>
+                        <a href="2013.html">2013</a><a href="2012.html">2012</a>
+                        <a href="2011.html">2011</a><a href="2010.html">2010</a>
+                        <a href="2009.html">2009</a><a href="2008.html">2008</a>
+                        <a href="2007.html">2007</a><a href="2006.html">2006</a>
+                        <a href="2005.html">2005</a><a href="2004.html">2004</a>
+                        <a href="2003.html">2003</a><a href="2002.html">2002</a>
+                        <a href="2001.html">2001</a><a href="2000.html">2000</a>
+                    </div>
+            </div>           
+            <a class="dropbtn col-md-2" href="propos.html">A propos</a>
+            <form class="form-inline col-md-34" action="#" class="col-md-1">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Recherche">
+                    <button class="btn btn-success" type="submit">Recherche</button>
+            </form>
+        </nav>
+</div>
+    <div>
+         <h2>Visualisation du paludisme dans la CEDEAO en 2009</h2>
+        <svg id="msda" width="1200" height="1200"></svg>
+    </div>
+    <script>
+                //Parametrage des dimensions
+                var margin = {top:190, right:20, bottom:70, left:90},
+                width = 1200, height = 700;
+                
+                //Mise en place du cadre de dessin
+                var svg = d3.select("#msda").append("svg")
+                .attr("width",width + margin.left + margin.right)
+                .attr("height",height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform","translate(" + margin.left + "." + margin.top + ")")
+                .style("border", "1px solid black");
+
+                var couleur=["#fbb4ae","#b3cde3","#ccebc5","#decbe4","#fed9a6","#ffffcc","#e5d8bd","#fddaec","#f2f2f2", "#bffaed", "#df2a7f", "#accaac","#7fedca","#ba7bf3"]
+                var couleur2=["#e41a1c","#377eb8","#4daf4a","#984ea3","#ff7f00","#ffff33","#a65628","#f781bf","#999999","#a6cee3","#fdb462","#007fff","#56adf8","#bff781"]
+
+                d3.csv('data/2009.csv', function(error, data) {
+
+                var total=d3.sum(data, function(d) {return (d["Deces"]);})
+                
+                var pieTab=d3.layout.pie();
+                pieTab.value(function(d){
+                    return d.Deces*360/total;
+                });
+
+                var arc=d3.svg.arc();
+                arc.outerRadius(200);
+
+                var grp=svg.append("g").attr("transform","translate(200,200)").attr("class", "cercle");
+                var graph=grp.selectAll("path").data(pieTab(data))
+                graph.enter()
+                    .append("path")
+                    .attr("fill",function(d,i){
+                            return(couleur[i]);
+                        })
+                    .attr("d",arc);
+                grp.append("text").text("Diagramme à secteur évolution nombre de décès en 2009 ").attr("x",-180).attr("y",220).style("text-decoration", "underline").style("font-style", "bold");
+
+                var legende=svg.append("g");
+
+                legende.selectAll("rect").data(data).enter().append("rect")
+                .attr("width",35).attr("height",15).attr("x",width-400)
+                .attr("y",function(d,i){return 20+i*30})
+                .style("fill",function(d,i){return (couleur[i])});
+
+                legende.selectAll("text").data(data).enter().append("text")
+                .attr("width",35).attr("height",15).attr("x",width-360)
+                .attr("y",function(d,i){return 32+i*30})
+                .text(function(d,i){return d.Country+" ("+((d.Deces/total)*100).toFixed(3)+" %)"
+            });
+
+                legende.append("text").text("Légende:").attr("x",width-300).attr("y",15)
+                .style("font-size","20px").style("text-decoration", "underline").style("font-style", "italic"); 
+
+                /*------------------------------------*/
+                var total1=d3.sum(data, function(d) {return (d["Malades"]);})
+                
+                var pieTab1=d3.layout.pie();
+                pieTab1.value(function(d){
+                    return d.Malades*360/total1;
+                });
+
+                var arc1=d3.svg.arc();
+                arc1.outerRadius(200).innerRadius(45);
+
+                var grp1=svg.append("g").attr("transform","translate(200,650)").attr("class", "cercle");
+                var graph1=grp1.selectAll("path").data(pieTab1(data))
+                graph1.enter()
+                    .append("path")
+                    .attr("fill",function(d,i){
+                            return(couleur2[i]);
+                        })
+                    .attr("d",arc1)
+                grp1.append("text").text("Diagramme à secteur évolution nombre de cas infectés en 2009 ").attr("x",-180).attr("y",220).style("text-decoration", "underline").style("font-style", "bold");
+
+                var legende1=svg.append("g");
+
+                legende1.selectAll("rect").data(data).enter().append("rect")
+                .attr("width",35).attr("height",15).attr("x",width-400)
+                .attr("y",function(d,i){return 460+i*30})
+                .style("fill",function(d,i){return (couleur2[i])});
+
+                legende1.selectAll("text").data(data).enter().append("text")
+                .attr("width",35).attr("height",15).attr("x",width-360)
+                .attr("y",function(d,i){return 472+i*30})
+                .text(function(d,i){return d.Country+" ("+((d.Malades/total1)*100).toFixed(3)+" %)"
+            });
+
+                legende1.append("text").text("Légende:").attr("x",width-300).attr("y",15)
+                .style("font-size","20px").style("text-decoration", "underline").style("font-style", "italic");
+
+                percent1=grp.append("rect").attr("x", 235).attr("y", 190).attr("width", 320).attr("height",70).attr("stroke","black").attr("stroke-width",2).attr("fill", "red")
+                grp.append("text").text("Passer la souris sur le diagramme").attr("x",237).attr("y",230).attr("id","info1");
+
+
+                d3.selectAll(".cercle").on('mouseenter',function(d){
+                    //alert(d.Country)
+                    d3.select(this).selectAll('path').data(data).on('click', function(d){return window.open(''+d.Country+'.html');});
+                    d3.select(this).selectAll('path').data(data).on('mouseenter', function(d){
+                        d3.select("#info1").text(function(){return ''+d.Country+' : Cliquez pour voir ses donnees'});
+                        });
+                    d3.select(this).selectAll('path').data(data).on('mouseleave', function(d){
+                        d3.select("#info1").text(function(){return 'Passer la souris sur le diagramme'});
+                        });
+                });
+
+            });            
+            </script>
+
+</body>
+
+</html>

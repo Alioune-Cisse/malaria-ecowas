@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="images/ecowas.jpg" />
+    <title>Malaria in Ecowas</title>
+    <!--link rel="stylesheet" type="text/css" href="style/bootstrap.css"-->
+    <link rel="stylesheet" type="text/css" href="style/design.css">
+    <script src="script/ajax.js"></script>
+    <script src="script/d3v5.js"></script>
+    <!--script src="script/jquery.js"></script-->
+    <script src="script/leaflet.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class='container-fluid' id='navig'>
+        <nav class='nav justify-content'>
+            <a class="dropbtn col-md-2" href="#">Accueil</a>
+            <div class="dropdown col-md-2">
+                <button class="dropbtn">Visualisation/pays</button>
+                    <div class="dropdown-content">
+                        <a href="Benin.html">Benin</a><a href="Burkina Faso.html">Burkina Faso</a>
+                        <a href="Côte d'Ivoire.html">Côte d'Ivoire</a><a href="Gambia.html">Gambie</a>
+                        <a href="Ghana.html">Ghana</a><a href="Guinea.html">Guinée</a>
+                        <a href="Guinea-Bissau.html">Guinée-Bissau</a><a href="Liberia.html">Liberia</a>
+                        <a href="Mali.html">Mali</a><a href="Niger.html">Niger</a>
+                        <a href="Nigeria.html">Nigeria</a><a href="Senegal.html">Senegal</a>
+                        <a href="Sierra Leone.html">Sierra Leone</a><a href="Togo.html">Togo</a>
+                    </div>
+            </div>
+            <div class="dropdown col-md-2">
+                <button class="dropbtn">Visualisation/annee</button>
+                    <div class="dropdown-content">
+                        <a href="2017.html">2017</a><a href="2016.html">2016</a>
+                        <a href="2015.html">2015</a><a href="2014.html">2014</a>
+                        <a href="2013.html">2013</a><a href="2012.html">2012</a>
+                        <a href="2011.html">2011</a><a href="2010.html">2010</a>
+                        <a href="2009.html">2009</a><a href="2008.html">2008</a>
+                        <a href="2007.html">2007</a><a href="2006.html">2006</a>
+                        <a href="2005.html">2005</a><a href="2004.html">2004</a>
+                        <a href="2003.html">2003</a><a href="2002.html">2002</a>
+                        <a href="2001.html">2001</a><a href="2000.html">2000</a>
+                    </div>
+            </div>          
+            <a class="dropbtn col-md-2" href="propos.html">A propos</a>
+            <form class="form-inline col-md-4" action="#" class="col-md-1" id="form">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Recherche">
+                    <button class="btn btn-success" type="submit">Recherche</button>
+            </form>
+        </nav>
+</div>
+
+    <h1>La malaria dans l'espace CEDEAO</h1>
+    <div class="row">
+        <div id="map" class="svg-container col-md-7"></div>
+        <div class="col-md-5">
+            <!--h2>Espace CEDEAO</h2-->
+            <img src="images/ecowas.jpg" id="img"><span id="pays">Ecowas</span><br/><br/>
+            <span >Population: </span><span id="popmoy">340000000 habitants (2017)</span><br/><br/>
+            <img src="images/cedeao.jpg" id='town'>
+        </div>
+    </div>
+<div class="container" id="palu">
+  <div id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li class="item1 active"></li>
+      <li class="item2"></li>
+      <li class="item3"></li>
+      <li class="item4"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+      <div class="item active">
+        <img src="images/palud.jpg" alt="img1" style='height:400px'>
+        <div class="carousel-caption">
+          <h3>Le Paludisme ou la Malaria</h3>
+          <p>Qu'est ce que c'est et quelles sont les zones touchées?
+            <a href="palu.html#palucedeao" target="_blank" id="click1">Voir</a></p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="images/symptom.jpg" alt="img2" style='height:400px'>
+        <div class="carousel-caption">
+          <h3>Ai-je le paludisme?</h3>
+          <p>Quels sont les symptômes? <a href="palu.html#symptomes" target="_blank" id="click2">Voir</a></p>
+        </div>
+      </div>
+    
+      <div class="item">
+        <img src="images/lutte.jpg" alt="img3" style='height:400px' href="#">
+        <div class="carousel-caption" id="car3">
+          <h3>Vaincre la maladie</h3>
+          <p>Lutter contre le palu? Ce que dit la CEDEAO <a href="palu.html#lutte" target="_blank">Voir</a></p>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="images/vize.jpg" alt="img4" style='height:400px'>
+        <div class="carousel-caption">
+          <h3>Le Paludisme en graphes</h3>
+          <p>Visualiser l'évolution de la Malria de 2000 à 2017 dans l'espace CEDEAO <a href="palu.html#svg2" target="_blank">Voir</a></p>
+        </div>
+      </div>
+  
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+    <!--div id="palucedeao"></div>
+    <div id="symptomes"><img src="images/malaria.png" alt="symptomes" id="sympt"></div>
+    <div id="lutte"></div>
+    <div id="svg2"></div>
+    <div id="svg3"></div-->
+    <script src="script/script.js"></script>
+    <div id="hist">
+        
+    </div>
+    <div id="source" style="text-align: right;">
+        Sources: <a href="https://apps.who.int/9c818db6-6531-450a-a617-a3c0c7595af1" target="_blank">https://apps.who.int/</a></br>
+        <a href="https://geojson.org/ " target="_blank">https://geojson.org/</a>
+    </div>
+</body>
+</html>

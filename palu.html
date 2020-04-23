@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="images/ecowas.jpg" />
+    <title>Malaria in Ecowas</title>
+    <link rel="stylesheet" type="text/css" href="style/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="style/design.css">
+    <script src="script/ajax.js"></script>
+    <script src="script/d3v5.js"></script>
+    <!--script src="script/jquery.js"></script-->
+    <script src="script/leaflet.js"></script>
+    <!--link rel="stylesheet" href="style/bootstrap.css"-->
+    <script src="script/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class='container-fluid' id='navig'>
+        <nav class='nav justify-content'>
+            <a class="dropbtn col-md-2" href="#">Accueil</a>
+            <div class="dropdown col-md-2">
+                <button class="dropbtn">Visualisation/pays</button>
+                    <div class="dropdown-content">
+                        <a href="Benin.html">Benin</a><a href="Burkina Faso.html">Burkina Faso</a>
+                        <a href="Côte d'Ivoire.html">Côte d'Ivoire</a><a href="Gambia.html">Gambie</a>
+                        <a href="Ghana.html">Ghana</a><a href="Guinea.html">Guinée</a>
+                        <a href="Guinea-Bissau.html">Guinée-Bissau</a><a href="Liberia.html">Liberia</a>
+                        <a href="Mali.html">Mali</a><a href="Niger.html">Niger</a>
+                        <a href="Nigeria.html">Nigeria</a><a href="Senegal.html">Senegal</a>
+                        <a href="Sierra Leone.html">Sierra Leone</a><a href="Togo.html">Togo</a>
+                    </div>
+            </div>
+            <div class="dropdown col-md-2">
+                <button class="dropbtn">Visualisation/annee</button>
+                    <div class="dropdown-content">
+                        <a href="2017.html">2017</a><a href="2016.html">2016</a>
+                        <a href="2015.html">2015</a><a href="2014.html">2014</a>
+                        <a href="2013.html">2013</a><a href="2012.html">2012</a>
+                        <a href="2011.html">2011</a><a href="2010.html">2010</a>
+                        <a href="2009.html">2009</a><a href="2008.html">2008</a>
+                        <a href="2007.html">2007</a><a href="2006.html">2006</a>
+                        <a href="2005.html">2005</a><a href="2004.html">2004</a>
+                        <a href="2003.html">2003</a><a href="2002.html">2002</a>
+                        <a href="2001.html">2001</a><a href="2000.html">2000</a>
+                    </div>
+            </div>          
+            <a class="dropbtn col-md-2" href="propos.html">A propos</a>
+            <form class="form-inline col-md-4" action="#" class="col-md-1" id="form">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Recherche">
+                    <button class="btn btn-success" type="submit">Recherche</button>
+            </form>
+        </nav>
+</div>
+    <div id="palucedeao">
+     <p>Le paludisme est une maladie potentiellement mortelle due à des parasites (plasmodium) transmis à l’homme par des piqûres de moustiques femelles infectés. C’est une maladie évitable et traitable dont la lutte a connu, entre les années 2000 et 2016 des progrès historiques sauvant des millions de vies. Toutefois, selon le Rapport de 2018 sur le paludisme dans le monde de l’OMS, aucun progrès significatif n’a été accompli en matière de réduction des cas de paludisme entre 2015 et 2017. En 2018, le nombre de cas de décès est resté pratiquement inchangé comparé à celui de 2017.
+    La plupart des cas (92 %) ont été enregistrés dans le continent Africain, loin devant la région Asie du Sud-Est (5 %) et la région Méditerranée orientale (2 %). La Région Ouest-Africaine supporte une part disproportionnée de la charge mondiale du paludisme avec 42 % des cas. Le paludisme représente un lourd fardeau économique et entrave le développement. En effet, la région de la CEDEAO fait partie des régions tropicales africaines où le paludisme est hautement endémique et constitue donc toujours une menace majeure pour la santé publique. Source: <a href="http://www.wahooas.org">http://www.wahooas.org</a></p> 
+    </div>
+    <div id="symptomes"><img src="images/malaria.png" alt="symptomes" id="sympt"></div>
+    <div class="container">
+    <div id="lutte" class="row">
+        <h4>Depuis 2003, Plan International mène une campagne visant à faire connaître ce fleau au grand public et à inciter la communauté internationale à se mobiliser davantage.</h4>
+        <div class="maladie col-md-3">
+            <b>1: Sensibilsation</b><br/>
+            <p>L'enjeu est de faire comprendre l'origine du paludisme, ses modes de transmissions et d'encourager les population à utiliser des moustiquaires. A cette fin, Plan International utilise des moyens familiers et traditionnels pour s'adresser aux populations ("le théâtre interactif" ou "la causerie éducative").</p>
+        </div>
+        <div class="maladie col-md-3">
+            <b>2: Prévention</b><br/>
+            <p>Utilisation de moustiquaires imprégnées longue durée. C'est actuellement le seul moyen efficace de protection individuelle contre le paludisme. Nous participons également à l'assainissement du cadre de vie des communautés, et menons des sessions d'éducation aux questions d'hygiène et de propreté.</p>
+        </div>
+        <div class="maladie col-md-3">
+            <b>3: Traitements</b><br/>
+            <p>Prise en charge précoce et efficace des malades. Plan International équipe les centres de santé et les renforce en formant du personnel. Source: <a href="https://www.plan-international.fr/info/action-humanitaire/domaines/sante-enfants/lutte-contre-paludisme">https://www.plan-international.fr/info/action-humanitaire/domaines/sante-enfants/lutte-contre-paludisme</a></p>
+        </div>
+    </div>
+    </div>
+    <div id="svg2"></div>
+    <div id="svg3"></div>
+    <script src="script/script.js"></script>
+    <div id="hist">
+        
+    </div>
+    <div id="source" style="text-align: right;">
+        Sources: <a href="https://apps.who.int/9c818db6-6531-450a-a617-a3c0c7595af1" target="_blank">https://apps.who.int/</a></br>
+        <a href="https://geojson.org/ " target="_blank">https://geojson.org/</a>
+    </div>
+</body>
+</html>
