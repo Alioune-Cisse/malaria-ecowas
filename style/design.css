@@ -1,0 +1,48 @@
+/*Menu*/
+.nav{background-color: #333;}
+.nav form{margin-top: 10px;}
+.dropbtn {background-color: #333;color: white;padding: 16px;font-size: 16px;border: none;}
+.dropdown {position: relative;display: inline-block;}
+.dropdown-content {display: none;position: absolute;background-color: #f1f1f1;min-width: 160px;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);z-index: 1;}
+.dropdown-content a {color: black;padding: 12px 16px;text-decoration: none;display: block;}
+.dropdown-content a:hover {background-color: #ddd;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn, .nav a:hover {background-color: #eee; color: black; text-decoration: none;}
+/*------------------------------------*/
+/*Body*/
+body{margin:0px;}
+.continent {fill: #f0e4dd;stroke: #e0cabc;stroke-width: 0.5;}
+.circles {fill: #3c373d;}
+.labels {font-family: sans-serif;font-size: 11px;fill: #3c373d;}
+h2, h1{text-align: center;text-decoration: underline;}
+img{width: 175px;height: 100px;}
+#town{width: 450px;height: 250px;}
+span{font-weight: bold;}
+#pays, #popmoy, #casmoy, #decesmoy{margin-left: 2%;}
+/*/Pays*/
+.line1 {fill: none;stroke: green;stroke-width: 1.5px}
+.line2 {fill: none;stroke: red;stroke-width: 1.5px;stroke-dasharray: 6;}
+.axis {font: 10px sans-serif;} 
+.axis path,.axis line {fill: none;stroke: black;shape-rendering: crispEdges;}
+/*A Propos*/
+#propos{text-align: center;margin-left: 15%;width: 70%;background: rgba(255,90,255,0.1);box-shadow: 0 0 15px rgba(0,0,0,0.4);border-radius: 5px;}
+.rs{width: 30px;height: 30px;border-radius: 100%;}
+.text{text-decoration: underline;}
+.icone{width: 100px; height: 100px; border-radius: 100%; margin-left: 7%}
+.icone2{margin-right: 2%;}
+#a1{margin-left: 7%}
+#a2, #a3{margin-left: 5%}
+/*Palu*/
+#lutte{text-align: center; margin-bottom: 25%; margin-top: 5%;}
+.maladie{margin:2%;background: rgba(100, 100, 100, 0.2); box-shadow: 0 0 15px rgba(0,0,0,0.4);border-radius: 5px; }
+.maladie:hover{background: rgba(80, 200, 100, 0.3);}
+/*--------------------------------------*/
+/*Carousel*/
+.carousel-caption p {font-size: 16px;}
+.position-carousel {margin-top: -20px;}
+.item img {width: 100%;height: 300px;}
+#sympt{width:100%; height: 550px; margin-top: 5%;}
+/*#palucedeao,#symptomes,#lutte,#svg2,#svg3{display: none;}*/
+#palucedeao, #palucedeao p{background-color: rgba(100,100,100,0.2); border:1px solid rgba(70,70,70,0.6); box-shadow: 0 0 15px rgba(0,0,0,0.4); margin: 10%;}
+#palucedeao:hover, #palucedeao p:hover{background: rgba(200,70,70,0.4);}
+/*---------------------------------------*/
